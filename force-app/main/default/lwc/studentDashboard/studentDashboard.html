@@ -1,0 +1,163 @@
+<template>
+
+    <!-- Header -->
+    <div class="header">
+
+        <div class="header-left">
+            <h1>🎓 Placement Tracker Dashboard</h1>
+            <p>Real-Time Placement Analytics</p>
+        </div>
+
+        <div class="header-right">
+            <lightning-button
+                label="Refresh"
+                icon-name="utility:refresh"
+                onclick={refreshDashboard}
+                variant="brand">
+            </lightning-button>
+        </div>
+
+    </div>
+
+    <!-- Dashboard Cards -->
+
+    <div class="dashboard">
+
+        <div class="card students">
+            <div class="icon">👨‍🎓</div>
+            <div>
+                <h2>{totalStudents}</h2>
+                <p>Total Students</p>
+            </div>
+        </div>
+
+        <div class="card companies">
+            <div class="icon">🏢</div>
+            <div>
+                <h2>{totalCompanies}</h2>
+                <p>Companies</p>
+            </div>
+        </div>
+
+        <div class="card applications">
+            <div class="icon">📄</div>
+            <div>
+                <h2>{totalApplications}</h2>
+                <p>Applications</p>
+            </div>
+        </div>
+
+        <div class="card placements">
+            <div class="icon">🎯</div>
+            <div>
+                <h2>{totalPlacements}</h2>
+                <p>Placements</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Search + Filters -->
+
+    <lightning-card title="Search Students" icon-name="utility:search">
+
+        <div class="slds-p-around_medium">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-3">
+
+                    <lightning-input
+                        type="search"
+                        label="Search Student"
+                        placeholder="Enter student name..."
+                        onchange={handleSearch}>
+                    </lightning-input>
+
+                </div>
+
+                <div class="slds-col slds-size_1-of-3">
+
+                    <lightning-combobox
+                        label="Branch"
+                        options={branchOptions}
+                        value={selectedBranch}
+                        onchange={handleBranch}>
+                    </lightning-combobox>
+
+                </div>
+
+                <div class="slds-col slds-size_1-of-3">
+
+                    <lightning-combobox
+                        label="Placement Status"
+                        options={statusOptions}
+                        value={selectedStatus}
+                        onchange={handleStatus}>
+                    </lightning-combobox>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+    <!-- Student Table -->
+
+    <lightning-card
+        title="Student Records"
+        icon-name="standard:people">
+
+        <lightning-datatable
+
+            key-field="Id"
+
+            data={filteredStudents}
+
+            columns={columns}
+
+            hide-checkbox-column>
+
+        </lightning-datatable>
+
+    </lightning-card>
+
+    <!-- Company Summary -->
+
+    <lightning-card
+        title="Company Statistics"
+        icon-name="standard:account">
+
+        <div class="companySummary">
+
+            <div class="summaryBox">
+
+                <h2>{totalCompanies}</h2>
+
+                <p>Total Companies</p>
+
+            </div>
+
+            <div class="summaryBox">
+
+                <h2>{totalPlacements}</h2>
+
+                <p>Total Placements</p>
+
+            </div>
+
+            <div class="summaryBox">
+
+                <h2>{totalApplications}</h2>
+
+                <p>Total Applications</p>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+</template>
